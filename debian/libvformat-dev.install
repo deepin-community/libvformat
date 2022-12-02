@@ -1,0 +1,3 @@
+usr/include
+usr/lib/*/libvformat*.so
+usr/lib/*/libvformat.a

@@ -1,0 +1,193 @@
+libvformat (1.13-12) unstable; urgency=medium
+
+  [ Thomas Preud'homme ]
+  * debian/control:
+    + Update Vcs fields.
+    + Remove deprecated DMUA flag.
+    + Remove build-dependency on autools-dev and autoreconf (thanks
+      janitor-bot).
+    + Bump debhelper version (thanks janitor-bot) and build-depend on
+      debhelper-compat instead of debhelper.
+    + Bump standard version (no changes needed).
+    + Set Rules-Requires-Root to no.
+  * debian/rules:
+    + Remove --with autotools_dev,autoreconf since debhelper has gained their
+      functionality (thanks janitor-bot).
+    + Harden build.
+    + Remove now useless calls to dpkg-buildflags since debhelper does it
+      automatically.
+  * debian/upstream:
+    + Set upstream metadata (thanks janitor-bot).
+  * debian/compat:
+    + Remove in favor of debhelper-compat build dependency.
+  * debian/patches:
+    + Add patch to fix typos reported by lintian.
+  * Install vformat in libformat0.
+  * Mark libvformat.la and vformat test program as not installed.
+
+  [ Ondřej Nový ]
+  * d/copyright: Use https protocol in Format field
+  * d/changelog: Remove trailing whitespaces
+  * d/control: Remove trailing whitespaces
+  * d/watch: Use https protocol
+
+ -- Thomas Preud'homme <robotux@debian.org>  Mon, 10 Aug 2020 22:55:14 +0100
+
+libvformat (1.13-11) unstable; urgency=low
+
+  * debian/control:
+    + Update maintainer email address.
+  * debian/copyright:
+    + Update maintainer email address.
+
+ -- Thomas Preud'homme <robotux@celest.fr>  Sun, 26 Aug 2012 17:24:33 +0200
+
+libvformat (1.13-10) unstable; urgency=low
+
+  * Add proper versioned dependency on debhelper and remove associated lintian
+    override.
+  * Use version 1.0 for DEP5 copyright.
+  * Bump Standards-Version to 3.9.3 (no changes needed).
+
+ -- Thomas Preud'homme <robotux@celest.fr>  Sat, 10 Mar 2012 16:13:07 +0100
+
+libvformat (1.13-9) unstable; urgency=low
+
+  * Fix FTBFS due to --Werror=format-security hardening flag. (Closes: 643434)
+  * debian/copyright:
+    + Give LGPL-2.1+ its own License paragraph.
+  * Remove dependency on autotools-dev (functionality included in
+    dh-autoreconf)
+  *
+
+ -- Thomas Preud'homme <robotux@celest.fr>  Tue, 27 Sep 2011 17:06:56 +0200
+
+libvformat (1.13-8) unstable; urgency=low
+
+  * Convert libvformat to multiarch.
+  * Remove useless dependency on libc6-dev.
+  * debian/rules:
+    + Use dpkg-buildflags to set CPPFLAGS, CFLAGS and LDFLAGS.
+  * debian/copyright:
+    + Document global license and copyright.
+  * Set DM-Upload-Allowed flag.
+
+ -- Thomas Preud'homme <robotux@celest.fr>  Wed, 03 Aug 2011 23:56:35 +0200
+
+libvformat (1.13-7) unstable; urgency=low
+
+  * Fix a typo in 2 manpages.
+  * Remove unused lintian override.
+  * Add a symbols control file and shlibs file.
+  * Stop building transitional packages.
+  * Exclude debian/.git-dpm and debian/gbp.conf from source package
+  * debian/compat:
+    + Bump debhelper compatibility from 7 to 8.
+  * debian/rules:
+    + Use dh-autoreconf to trigger autoreconf at build time.
+  * debian/control:
+    + Improve description of the package.
+    + Bump Standard-Version from 3.8.4 to 3.9.2 (no changes needed).
+  * debian/patches:
+    + Update patches meta-information.
+    + Remove 0002-Update-linux-maintainer.patch.
+  * debian/copyright:
+    + Convert to DEP5 candidate format.
+  * debian/*.install:
+    + Make use of autodest feature to simplify the files.
+  * debian/*.dirs:
+    + Remove empty *.dirs files.
+
+ -- Thomas Preud'homme <robotux@celest.fr>  Mon, 11 Apr 2011 19:14:15 +0200
+
+libvformat (1.13-6) unstable; urgency=low
+
+  [ Thomas Preud'homme ]
+  * New maintainer. (Closes: #535686)
+  * Bug fixes:
+    + Remove leading space when unfolding. (Closes: #539442 thanks to Daniele
+      Forsi)
+    + Correct the use of va_arg functions in the tests to make it work on all
+      archs.
+  * debian/control:
+    + Rename libvformat1 into libvformat0 to match soname. (Closes: #448002)
+    + Rename libvformat1-dev into libvformat-dev as only one version is
+      supported.
+    + Bump Standard-Version from 3.8.3 to 3.8.4 (no changes needed).
+    + Add Vcs-Browser and Vcs-Git fiels.
+  * debian/source/format:
+    + Switch to dpkg-source 3.0 (quilt) format.
+  * debian/compat:
+    + Bump debhelper compatibility from 5 to 7.
+  * Add a lintian override for ltmain.sh.
+
+ -- Thomas Preud'homme <robotux@celest.fr>  Wed, 12 May 2010 19:17:34 +0200
+
+libvformat (1.13-5) unstable; urgency=low
+
+  * QA upload.
+  * debian/copyright:
+    + include copyright assignment.
+    + point to a versioned license.
+  * debian/control:
+    + remove debhelper dependency from the runtime binary package.
+      (Closes: #363569, LP: #441893)
+    + build-depend on autotools-dev.
+    + add ${misc:Depends} to all binary packages.
+    + set maintainer to Debian QA Group.
+    + make dependency to triggers smoother with install-info.
+    + improve short descriptions a little.
+    + add Homepage field, so that we don't loose track of upstream.
+    + tighten the dependency between -dev and lib package.
+    + update Standards-Version to 3.8.3.
+  * delete trailing whitespace from this log.
+  * debian/rules:
+    + remove DH_COMPAT.
+    + don't ignore make clean error.
+    + remove some commented lines.
+    + touch build-stamp, as it is not declared as a PHONY target.
+    + link config.{sub,guess} in the configuration step.
+    + don't incorrectly copy config.{sub,guess} from autotools-dev.
+    + improve support for cross-compilation.
+  * debian/compat:
+    + add, with 5.
+  * debian/watch:
+    + include, with redirector to sourceforge.
+  * doc/libvformat.texi: added info dirsection (Closes: #528907).
+
+ -- Rogério Brito <rbrito@ime.usp.br>  Mon, 19 Oct 2009 17:17:37 -0200
+
+libvformat (1.13-4) unstable; urgency=low
+
+  * Resolved ambiguity concerning redefinition of uint32_t: Closes: #336326
+  * Removed dependency on c2man: Closes: #313265
+  * Included info Files into the documentation.
+  * Removed the CVS directories in the debian tree
+  * Removed the libvformat.info and the texinfo.tex in the doc
+    directory. The texinfo.tex is taken from the texinfo package.
+  * Removed common/types.h altogether
+
+ -- Mathias Palm <mathias.palm@gmx.net>  Sun, 8 January 2006 17:03:00 +0200
+
+libvformat (1.13-3) unstable; urgency=low
+
+  * sorted the libraries and the dev-files into libs and libdevel, respectively
+
+ -- Mathias Palm <mathias.palm@gmx.net>  Thu, 15 May 2003 15:52:28 +0200
+
+libvformat (1.13-2) unstable; urgency=low
+
+  * removed package restriction to i386 Closes: #188009
+  * fixed a minor bug in vf_iface.h
+
+  * removed include of system header files stdarg.h and times.h when
+    running c2man (c2man cant handle __xxxx type entries)
+    Closes: #191205
+
+ -- Mathias Palm <mathias.palm@gmx.net>  Thu, 10 Apr 2003 14:38:17 +0200
+
+libvformat (1.13-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Mathias Palm <mathias.palm@gmx.net>  Tue, 15 Oct 2002 19:03:07 +0200

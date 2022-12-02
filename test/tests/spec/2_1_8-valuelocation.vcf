@@ -1,0 +1,4 @@
+BEGIN:VCARD
+PHOTO;VALUE=URL;TYPE=GIF:http://www.abc.com/dir_photos/my_photo.gif
+SOUND;VALUE=CONTENT-ID:<jsmith.part3.960817T083000.xyzMail@host1.com>
+END:VCARD

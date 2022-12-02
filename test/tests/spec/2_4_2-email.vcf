@@ -1,0 +1,16 @@
+BEGIN:VCARD
+EMAIL;INTERNET:john.public@abc.com
+EMAIL;TYPE=INTERNET:john.public@abc.com
+EMAIL;TYPE=AppleLink:john.public@abc.com
+EMAIL;TYPE=ATTMail:john.public@abc.com
+EMAIL;TYPE=CIS:john.public@abc.com
+EMAIL;TYPE=eWorld:john.public@abc.com
+EMAIL;TYPE=INTERNET:john.public@abc.com
+EMAIL;TYPE=IBMMail:john.public@abc.com
+EMAIL;TYPE=MCIMail:john.public@abc.com
+EMAIL;TYPE=POWERSHARE:john.public@abc.com
+EMAIL;TYPE=PRODIGY:john.public@abc.com
+EMAIL;TYPE=TLX:john.public@abc.com
+EMAIL;TYPE=X400:john.public@abc.com
+END:VCARD
+

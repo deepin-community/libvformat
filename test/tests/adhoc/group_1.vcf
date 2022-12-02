@@ -1,0 +1,6 @@
+BEGIN:VCARD
+N:aaa;bbb;ccc
+A.N:ddd;eee;fff
+B.N:ggg;hhh;iii
+C.N:jjj;kkk;lll
+END:VCARD

@@ -1,0 +1,207 @@
+/-----------------------------------------------------------------------------
+| $Log: README,v $
+| Revision 1.1  2002/10/11 14:08:59  monos
+| *** empty log message ***
+|
+| Revision 1.13  2001/12/28 17:29:29  tilda
+| Minor tidy ups after updating to DevIL-1.2.4
+|
+| Revision 1.12  2001/12/16 16:01:15  tilda
+| Update release notes before Alpha-5
+|
+| Revision 1.11  2001/12/10 09:28:35  tilda
+| Typo.
+|
+| Revision 1.10  2001/12/10 09:21:47  tilda
+| Describe image librrary build options.
+|
+| Revision 1.9  2001/12/02 21:20:25  tilda
+| Update prior to Alpha-4
+|
+| Revision 1.8  2001/11/27 18:32:59  tilda
+| Reword LICENCING section in README.txt.  Move docs into vformatl.dsp
+|
+\-----------------------------------------------------------------------------
+
+Welcome to the vFormat Library!
+
+LICENCE
+=======
+
+All this software (the library and the demo apps) is distributed under the
+GNU Lesser General Public Licence. A copy of this is distributed with the
+library - see the file LICENCE.txt in the libraries root directory.
+
+Please read and understand the comments at the top of vf_iface.h before use.
+
+
+RELEASES
+========
+This will be considered "alpha" until all the features I think should be
+there are there.  It'll be "beta" until I know of no outstanding issues.
+Release history:
+
+Alpha-1 : first cut at a release, known problems with BASE64, no create/modify API
+
+Alpha-2 : BASE64 encoding fixed, first pass at create/modify functionality
+
+Alpha-3 : including first usable version of vfedit demo app
+
+Alpha-4 : Add basic framework support for vCalendar to VFEDIT.  Sort out tools menu
+          and font manager.  Fix IIDs 485069, 485071, 488003, 484956, 488006, 488011.
+          Sort out various bugs in IMGHLP DLLs.
+
+Alpha-5 : Various bug fixes and move to use of a image library (DevIL from SourceForge)
+          rather than various dodgy home-grown bits'n'pieces.  Fix IIDs 484685, 491475
+          489753, 484684, 488021, 484958, 484844, 484843.  vfedit now reasonably usable
+          (for VCARDs).
+
+
+BUILDING
+========
+
+Under Windows, the build uses Microsoft's Visual C++ version 6.0 - the
+project & workspace files are included in the distribution. The workspace
+at .../build/vformat/vformat.dsw references will build and install the
+library (ie. the .DLL) and builds the test harness.  In detail:
+
+  .../build/vformat/vformat.dsw - workspace including other project files
+  .../build/vformatl/vformatl.dsp - builds (and installs) DLL version
+  .../build/tools - various tools & utilities
+
+  .../build/vfdisplay - minimal app enumerating contents of a vobject
+  .../build/vfedit - demo app supporting VCARDs & VCALENDARs.
+
+Beware - vformatl.dsp and the other DSPs will install the DLLs in your
+windows/system directory using the INSDLL.BAT file in the tools directory
+which is invoked as a post-build step (see the post-build tab on the
+projects/settings dialog).  If you don't like this, delete the post
+build step or edit the script to put the DLL somewhere else.
+
+
+
+IMAGE LIBRARY
+=============
+Imaging formats (.JPG etc) are handled in the demo applications using a 3rd party
+open source image library.  Early releases of VFEDIT used various bits of garbage
+I'd collected over the years wrapped up in an .DLL (deliberately hiding the crap).
+
+As of Alpha-5, VFEDIT includes support for DevIL - the Developer's Image Libray.
+Details of this can be found at http://OpenIL.sourceforge.net.
+
+To enable image support you need to download & install DevIL and change the line
+at the top of ImageManager.cpp to #define USE_IMAGE_LIBRARY (rather than #undef).
+
+Here are the instructions to get a basic version of this going, this is based on
+the install instructions included in DevIL & various things about my machine.  The
+basic version supports .BMP files, I've not (yet) got round to adding .JPG etc to
+my build of DevIL.
+
+ - download DevIL-1.2.4.zip from the page in SourceForge.
+ - unpack the .ZIP file somewhere convenient eg. D:\DevIL
+ - change your global include paths (eg. Tools->Options->Directories in MSVC6)
+   to include DevIL's include dirs (eg. D:\DevIL\ImageLib\Include)
+ - change your global library paths to include DevIL's include dirs
+   (eg. D:\DevIL\ImageLib\lib and D:\DevIL\ImageLib\lib\debug)
+ - change the post build steps as appropriate for your system
+ - uncomment IL_NO_GIF, IL_NO_JPG, IL_NO_MNG, IL_NO_PNG, IL_NO_TIF
+ - uncomment IL_NO_LCMS and comment out ilApplyProfile from IL.DEF
+ - comment out ILUT_USE_DIRECTX8 in il/ilut.h (I don't have it installed)
+ - comment out ilutD3D8LoadSurface ... ilutD3D8VolTexFromResource from ILUT.def
+ - change the USE_IMAGE_LIBRARY #define in ImageManager.cpp
+
+
+
+
+REFERENCES
+==========
+[1] vCard, The Electronic Business Card Version 2.1 from Versit.
+
+
+OUTSTANDING ISSUES
+==================
+
+After Alpha-4, this section transferred to the SourceForge database.
+
+
+THE TEST HARNESS
+================
+
+Running the test harness will produce a load of output similar to
+the following:
+
+--tests//adhoc//straight_qp_4.vcf------------------------------------------
+Successfully read file 'tests//adhoc//straight_qp_4.vcf'
+Successfully wrote file 'vobject.vcf'
+Successfully wrote file 'tests//adhoc//straight_qp_4.out-1'
+ Sizes difference :
+  tests//adhoc//straight_qp_4.out-1 (139 bytes) Vs.
+  tests//adhoc//straight_qp_4.vcf (151 bytes)
+    Warning - differences after 1st read/write
+Successfully read file 'tests//adhoc//straight_qp_4.out-1'
+Successfully wrote file 'tests//adhoc//straight_qp_4.out-2'
+    OK - no differences after 2nd read/write
+                                          [60 tests, 0 errors, 13 warnings]
+
+What does it all mean?  All the warnings are a result of size differences
+between the original file & the result of reading/writing the file back.
+The size differences are a result of:
+   * slightly different conventions for line length
+   * line ends (eg <LF> not <CR><LF>)
+   * different selection of quoted chars in QP format
+   * excess whitespace at the end of the file
+   * characters ignored before the first BEGIN: or between END: and BEGIN:
+
+Each such difference is clocked up as a warning.  The [...] stuff is
+a rolling count of tests, errors & warnings.  An error is logged if
+after the file is "canonicalised" (well; into the format assumed by
+this library anyway) we fail to read & write and get the same output.
+
+The files in tests/spec are named after sections of the (very fine)
+vcard 2.1 specification eg. 2_1_4_1-grouping-sequential.vcf will refer
+to something like "sequential grouping" in section 2.1.4.1 of the
+Versit doc (see http://www.imc.org/pdi/ for the docs).
+
+(There is no intention to infringe the copyright anyone might consider
+they have vested in the text of these examples)
+
+The files in tests/adhoc are just sample scripts I knocked up
+during development.
+
+
+FUTURE PLANS
+============
+
+1) Convert this document to some decent on-line docs on the project website.
+
+2) Write a vobjects library .../src/vobjects & .../build/vobjectsl which
+   provides C++ classes modelling a vformat object with derived classes
+   for vCard, vNote etc.  Functions on the base class provide file handling
+   and change logs.  Functions on the derived classes handle a user's
+   normal interaction with the relevant objects eg:
+
+      typedef enum
+      {
+          Work,
+          Home,
+          Cellular,
+          Mobile = Cellular
+      }
+      vf_phone_type_t;
+
+      bool_t vformat::vcard::set_phone_no(
+          vf_phone_type_t t,        /* Type of phone number */
+          bool_t is_pref,           /* Should this entry be given the PREF flag? */
+          const char *phone_no      /* The phone number itself */
+          );
+
+4) Duplicate the MFC app as a GTK app.
+
+
+
+CREDITS
+=======
+
+Enjoy!
+
+Nick <Tilda@indigo8.freeserve.co.uk>

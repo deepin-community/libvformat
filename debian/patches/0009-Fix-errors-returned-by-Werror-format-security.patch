@@ -1,0 +1,30 @@
+From aa525203ceaac94ebbe5e20c041f4482f8db396b Mon Sep 17 00:00:00 2001
+From: Thomas Preud'homme <robotux@celest.fr>
+Date: Tue, 27 Sep 2011 16:54:46 +0200
+Subject: Fix errors returned by -Werror=format-security
+
+Option -Werror=format-security of gcc returns several error with regards
+to szEndOfLine. Using "\r\n" instead of the ascii codes 0x0D, 0x0A and
+0x00 avoid the error.
+
+Origin: vendor
+Bug-Debian: http://bugs.debian.org/643434
+Forwarded: no
+Last-Updated: 2011-09-27
+---
+ src/vf_writer.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/vf_writer.c b/src/vf_writer.c
+index 29b83b5..3d5ad16 100644
+--- a/src/vf_writer.c
++++ b/src/vf_writer.c
+@@ -144,7 +144,7 @@ static bool_t write_vobject_to_file(
+  Private Data
+  *============================================================================*/
+ 
+-static const char szEndOfLine[3] = { 0x0D, 0x0A, 0x00 };
++static const char szEndOfLine[] = "\r\n";
+ 
+ /*============================================================================*
+  Public Function Implementations

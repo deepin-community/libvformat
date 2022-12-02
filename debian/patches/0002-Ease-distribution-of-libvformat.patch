@@ -1,0 +1,51 @@
+From 73ac24c61c03ea6a0bcae657b4ff260a03547d27 Mon Sep 17 00:00:00 2001
+From: Mathias Palm <mathias.palm@gmx.net>
+Date: Sun, 9 May 2010 00:37:48 +0200
+Subject: Ease distribution of libvformat
+
+* Remove AC_PROG_RANLIB as there is no need for ranlib when libtool is used.
+* Remove unused AC_CONFIG_FILES.
+* Remove files generated when testing the library in clean rule.
+
+origin: vendor
+forwarded: https://sourceforge.net/tracker/?func=detail&aid=3084910&group_id=37192&atid=419516
+Last-Update: 2010-10-10
+---
+ configure.ac     | 3 +--
+ test/Makefile.am | 6 +++++-
+ 2 files changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 744f321..ab68899 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -8,7 +8,6 @@ AM_CONFIG_HEADER(config.h)
+ # AC_PROG_CC
+ 
+ # Checks for libraries.
+-AC_PROG_RANLIB
+ AC_PROG_LIBTOOL
+ 
+ # Checks for header files.
+@@ -25,5 +24,5 @@ AC_FUNC_STAT
+ AC_CHECK_FUNCS([atexit memset strstr])
+ 
+ AC_OUTPUT([Makefile src/Makefile vformat/Makefile test/Makefile doc/Makefile])
+-AC_CONFIG_FILES([])
++#AC_CONFIG_FILES([])
+ 
+diff --git a/test/Makefile.am b/test/Makefile.am
+index 883a1a7..407e901 100644
+--- a/test/Makefile.am
++++ b/test/Makefile.am
+@@ -4,4 +4,8 @@ vformat_SOURCE = testsuppt.c vformat.c
+ vformat_LDADD = ../src/.libs/libvformat.a testsuppt.o 
+ 
+ EXTRA_DIST = testsuppt.c testsuppt.h tests/access/*.vcf tests/adhoc/*.vc* tests/spec/*.vcf tests/utf-8/*.vcf
+-TESTS = vformat
+\ No newline at end of file
++TESTS = vformat
++
++clean-local:
++	find . -name *out* -exec rm -f {} ';'
++	rm -f *.vcf

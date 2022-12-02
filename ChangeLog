@@ -1,0 +1,5 @@
+2002-11-22  Mathias Palm  <mathias.palm@gmx.net>
+
+	* manpages are generated from the header file and installed
+
+see README

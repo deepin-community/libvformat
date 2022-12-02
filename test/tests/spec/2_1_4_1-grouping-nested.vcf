@@ -1,0 +1,9 @@
+BEGIN:VCARD
+N:abc;def;ghi
+BEGIN:VCARD
+N:jkl;mno;pqr
+BEGIN:VCARD
+N:stu;vwx;yz
+END:VCARD
+END:VCARD
+END:VCARD

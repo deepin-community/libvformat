@@ -1,0 +1,11 @@
+0001-Copy-common-types.h-to-vformat-vf_iface.h.patch
+0002-Ease-distribution-of-libvformat.patch
+0003-Add-sample-files.patch
+0004-Provide-info-documentation.patch
+0005-Add-manpages.patch
+0006-Remove-leading-space-when-unfolding.patch
+0007-Cast-NULL-in-void-in-functions-using-va_arg.patch
+0008-Fix-typo-in-manpage-and-source.patch
+0009-Fix-errors-returned-by-Werror-format-security.patch
+0010-Fix-typos-in-man-pages.patch
+auto-gitignore

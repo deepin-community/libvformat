@@ -1,0 +1,16 @@
+BEGIN:VCARD
+N:aaa;bbb;ccc
+FN:111;222;333
+BEGIN:VCARD
+A.N:ddd;eee;fff
+A.FN:111ddd;222eee;222fff
+BEGIN:VCARD
+B.N:ggg;hhh;iii
+B.FN:111ggg;222hhh;333iii
+BEGIN:VCARD
+C.N:jjj;kkk;lll
+C.FN:111jjj;222kkk;333lll
+END:VCARD
+END:VCARD
+END:VCARD
+END:VCARD

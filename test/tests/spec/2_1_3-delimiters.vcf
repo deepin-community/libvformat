@@ -1,0 +1,7 @@
+BEGIN:VCARD
+NOTE_1:This is a very long description that exists on a long line.
+NOTE_2:This is a very long description 
+  that exists on a long line.
+NOTE_2:This is a very long description
+  that exists on a long line.
+END:VCARD

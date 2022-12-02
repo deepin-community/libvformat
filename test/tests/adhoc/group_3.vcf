@@ -1,0 +1,13 @@
+BEGIN:VCARD
+N:aaa;bbb;ccc
+FN:111;222;333
+X-1-FILLER:1;2;3;4;5;6;7;8
+A.N:ddd;eee;fff
+A.FN:111ddd;222eee;222fff
+X-2-FILLER:1;2;3;4;5;6;7;8
+B.N:ggg;hhh;iii
+B.FN:111ggg;222hhh;333iii
+X-3-FILLER:1;2;3;4;5;6;7;8
+C.N:jjj;kkk;lll
+C.FN:111jjj;222kkk;333lll
+END:VCARD
